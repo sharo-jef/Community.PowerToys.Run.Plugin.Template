@@ -159,7 +159,7 @@ Write-Output "{
 # Generate build script
 Write-Output "`$ErrorActionPreference = `"Stop`"
 
-`$Version = (Get-Content -Raw -Path `"`$PSScriptRoot\ILS\plugin.json`" | ConvertFrom-Json).Version
+`$Version = (Get-Content -Raw -Path `"`$PSScriptRoot\$ProjectName\plugin.json`" | ConvertFrom-Json).Version
 
 if (Test-Path -Path `"`$PSScriptRoot\$ProjectName\bin`") {
   Remove-Item -Path `"`$PSScriptRoot\$ProjectName\bin\*`" -Recurse
