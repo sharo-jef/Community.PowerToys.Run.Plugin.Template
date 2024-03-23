@@ -56,6 +56,7 @@ Write-Output "<Project Sdk=`"Microsoft.NET.Sdk`">
   <useWPF>true</useWPF>
   <ImplicitUsings>enable</ImplicitUsings>
   <Nullable>enable</Nullable>
+  <EnableWindowsTargeting>true</EnableWindowsTargeting>
 </PropertyGroup>
 
 <ItemGroup>
