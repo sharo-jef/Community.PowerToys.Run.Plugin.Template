@@ -13,9 +13,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dotnet
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.100-preview.7
+          dotnet-version: 6.0.x
       - name: Initialize
         shell: pwsh
         run: .\New-Solution.ps1
