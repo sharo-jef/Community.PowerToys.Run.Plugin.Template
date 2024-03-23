@@ -47,7 +47,6 @@ EndGlobal
 New-Item -ItemType Directory -Path "$PSScriptRoot\$ProjectName"
 dotnet new classlib -n $ProjectName -o "$PSScriptRoot\$ProjectName"
 Remove-Item -Path "$PSScriptRoot\$ProjectName\*.cs"
-Remove-Item -Path "$PSScriptRoot\$ProjectName\$ProjectName.csproj"
 
 # Generate .csproj
 Write-Output "<Project Sdk=`"Microsoft.NET.Sdk`">
