@@ -92,7 +92,7 @@ namespace PowerToysRunPluginSample
 {
     public class Main : IPlugin
     {
-        private PluginInitContext? context { get; set; }
+        private PluginInitContext? Context { get; set; }
 
         public string Name => `"$ProjectName`";
 
@@ -104,8 +104,7 @@ namespace PowerToysRunPluginSample
         {
             return new List<Result>
             {
-                new Result
-                {
+                new() {
                     Title = `"Item1`",
                     SubTitle = `"Item1 Subtitle`",
                     Action = e =>
@@ -119,7 +118,7 @@ namespace PowerToysRunPluginSample
 
         public void Init(PluginInitContext context)
         {
-            this.context = context;
+            Context = context;
         }
     }
 }" | Tee-Object -FilePath "$PSScriptRoot\$ProjectName\Main.cs"
