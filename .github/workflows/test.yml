@@ -18,7 +18,7 @@ jobs:
           dotnet-version: 6.0.x
       - name: Initialize
         shell: pwsh
-        run: .\New-Solution.ps1 -ActionKeyword hoge -Author hoge -ProjectName hoge -DotnetVersion hoge
+        run: .\New-Solution.ps1 -ActionKeyword hoge -Author hoge -ProjectName hoge
       - name: Build
         shell: pwsh
         run: .\Build-Solution.ps1
