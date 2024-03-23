@@ -88,6 +88,7 @@ Write-Output "<Project Sdk=`"Microsoft.NET.Sdk`">
 
 # Generate Main.cs
 Write-Output "using System.Windows;
+using ManagedCommon;
 using Wox.Plugin;
 
 namespace PowerToysRunPluginSample
