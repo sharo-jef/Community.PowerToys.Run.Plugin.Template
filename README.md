@@ -8,10 +8,10 @@
     ```
     .\New-Solution.ps1
     ```
-  1. You can specify options.
-      ```
-      .\New-Solution.ps1 -ActionKeyword $ActionKeyword -Author $AuthorName -ProjectName $ProjectName -DotnetVersion $DotnetVersion
-      ```
+    1. You can specify options.
+        ```
+        .\New-Solution.ps1 -ActionKeyword $ActionKeyword -Author $AuthorName -ProjectName $ProjectName -DotnetVersion $DotnetVersion
+        ```
 1. Edit $ProjectName\Main.cs
 1. Build (zip file will be generated in repository root directory)
     ```
