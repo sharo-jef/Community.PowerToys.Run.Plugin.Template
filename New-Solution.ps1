@@ -91,7 +91,7 @@ Write-Output "using ManagedCommon;
 using System.Windows;
 using Wox.Plugin;
 
-namespace PowerToysRunPluginSample
+namespace $ProjectName
 {
     public class Main : IPlugin
     {
