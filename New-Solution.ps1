@@ -52,38 +52,37 @@ Remove-Item -Path "$PSScriptRoot\$ProjectName\*.cs"
 
 # Generate .csproj
 Write-Output "<Project Sdk=`"Microsoft.NET.Sdk`">
+  <PropertyGroup>
+    <TargetFramework>$DotnetVersion</TargetFramework>
+    <useWPF>true</useWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
 
-<PropertyGroup>
-  <TargetFramework>$DotnetVersion</TargetFramework>
-  <useWPF>true</useWPF>
-  <ImplicitUsings>enable</ImplicitUsings>
-  <Nullable>enable</Nullable>
-  <EnableWindowsTargeting>true</EnableWindowsTargeting>
-</PropertyGroup>
+  <ItemGroup>
+    <Reference Include=`"PowerToys.Common.UI`">
+      <HintPath>..\libs\PowerToys.Common.UI.dll</HintPath>
+    </Reference>
+    <Reference Include=`"PowerToys.ManagedCommon`">
+      <HintPath>..\libs\PowerToys.ManagedCommon.dll</HintPath>
+    </Reference>
+    <Reference Include=`"Wox.Infrastructure`">
+      <HintPath>..\libs\Wox.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include=`"Wox.Plugin`">
+      <HintPath>..\libs\Wox.Plugin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
-<ItemGroup>
-  <Reference Include=`"PowerToys.Common.UI`">
-    <HintPath>..\libs\PowerToys.Common.UI.dll</HintPath>
-  </Reference>
-  <Reference Include=`"PowerToys.ManagedCommon`">
-    <HintPath>..\libs\PowerToys.ManagedCommon.dll</HintPath>
-  </Reference>
-  <Reference Include=`"Wox.Infrastructure`">
-    <HintPath>..\libs\Wox.Infrastructure.dll</HintPath>
-  </Reference>
-  <Reference Include=`"Wox.Plugin`">
-    <HintPath>..\libs\Wox.Plugin.dll</HintPath>
-  </Reference>
-</ItemGroup>
-
-<ItemGroup>
-  <!-- <None Update=`"images\icon.png`">
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-  </None> -->
-  <None Update=`"plugin.json`">
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-  </None>
-</ItemGroup>
+  <ItemGroup>
+    <None Update=`"images\icon.png`">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update=`"plugin.json`">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>" | Tee-Object -FilePath "$PSScriptRoot\$ProjectName\$ProjectName.csproj"
 
 # Generate Main.cs
@@ -160,7 +159,7 @@ Write-Output "{
 # Generate build script
 Write-Output "`$ErrorActionPreference = `"Stop`"
 
-`$Version = `"0.0.1`"
+`$Version = (Get-Content -Raw -Path `"`$PSScriptRoot\ILS\plugin.json`" | ConvertFrom-Json).Version
 
 if (Test-Path -Path `"`$PSScriptRoot\$ProjectName\bin`") {
   Remove-Item -Path `"`$PSScriptRoot\$ProjectName\bin\*`" -Recurse
