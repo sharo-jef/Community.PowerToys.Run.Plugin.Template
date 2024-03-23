@@ -46,7 +46,7 @@ EndGlobal
 # Generate project
 New-Item -ItemType Directory -Path "$PSScriptRoot\$ProjectName"
 dotnet new classlib -n $ProjectName -o "$PSScriptRoot\$ProjectName"
-Remove-Item -Path "$PSScriptRoot\$ProjectName\Class1.cs"
+Remove-Item -Path "$PSScriptRoot\$ProjectName\*.cs"
 Remove-Item -Path "$PSScriptRoot\$ProjectName\$ProjectName.csproj"
 
 # Generate .csproj
