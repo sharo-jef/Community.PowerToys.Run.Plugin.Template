@@ -173,5 +173,5 @@ Rename-Item -Path `"`$PSScriptRoot\$ProjectName\bin\Release`" -NewName `"$Projec
 if (Test-Path -Path `$PSScriptRoot\$ProjectName-`$Version.zip) {
   Remove-Item -Path `$PSScriptRoot\$ProjectName-`$Version.zip
 }
-Compress-Archive -Path `"`$PSScriptRoot\$ProjectName\bin\$ProjectName\$DotnetVersion`" -DestinationPath `"`$PSScriptRoot\$ProjectName-`$Version.zip`"
+Compress-Archive -Path `"`$PSScriptRoot\$ProjectName\bin\$ProjectName\$DotnetVersion\*`" -DestinationPath `"`$PSScriptRoot\$ProjectName-`$Version.zip`"
 " | Tee-Object -FilePath "$PSScriptRoot\Build-Solution.ps1"
