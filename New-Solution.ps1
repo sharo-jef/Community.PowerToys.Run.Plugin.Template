@@ -152,7 +152,9 @@ Write-Output "{
   `"Language`": `"csharp`",
   `"Website`": `"WEB_SITE_URL`",
   `"ExecuteFileName`": `"$ProjectName.dll`",
-  `"IsGlobal`": false
+  `"IsGlobal`": false,
+  `"IcoPathDark`": `"images\\icon.png`",
+  `"IcoPathDark`": `"images\\icon.png`"
 }" | Tee-Object -FilePath "$PSScriptRoot\$ProjectName\plugin.json"
 
 # Generate build script
