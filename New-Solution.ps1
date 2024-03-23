@@ -87,8 +87,8 @@ Write-Output "<Project Sdk=`"Microsoft.NET.Sdk`">
 </Project>" | Tee-Object -FilePath "$PSScriptRoot\$ProjectName\$ProjectName.csproj"
 
 # Generate Main.cs
-Write-Output "using System.Windows;
-using ManagedCommon;
+Write-Output "using ManagedCommon;
+using System.Windows;
 using Wox.Plugin;
 
 namespace PowerToysRunPluginSample
