@@ -45,6 +45,8 @@ EndGlobal
 
 # Generate project
 New-Item -ItemType Directory -Path "$PSScriptRoot\$ProjectName"
+New-Item -ItemType Directory -Path "$PSScriptRoot\$ProjectName\images"
+New-Item -ItemType File -Path "$PSScriptRoot\$ProjectName\images\.gitkeep"
 dotnet new classlib -n $ProjectName -o "$PSScriptRoot\$ProjectName"
 Remove-Item -Path "$PSScriptRoot\$ProjectName\*.cs"
 
@@ -92,6 +94,8 @@ namespace PowerToysRunPluginSample
 {
     public class Main : IPlugin
     {
+        private string? IconPath { get; set; }
+
         private PluginInitContext? Context { get; set; }
 
         public string Name => `"$ProjectName`";
@@ -107,6 +111,7 @@ namespace PowerToysRunPluginSample
                 new() {
                     Title = `"Item1`",
                     SubTitle = `"Item1 Subtitle`",
+                    IcoPath = IconPath,
                     Action = e =>
                     {
                         Clipboard.SetText(`"Item1`");
@@ -119,6 +124,18 @@ namespace PowerToysRunPluginSample
         public void Init(PluginInitContext context)
         {
             Context = context;
+            Context.API.ThemeChanged += OnThemeChanged;
+            UpdateIconPath(Context.API.GetCurrentTheme());
+        }
+
+        private void UpdateIconPath(Theme theme)
+        {
+            IconPath = `"images/icon.png`";
+        }
+
+        private void OnThemeChanged(Theme currentTheme, Theme newTheme)
+        {
+            UpdateIconPath(newTheme);
         }
     }
 }" | Tee-Object -FilePath "$PSScriptRoot\$ProjectName\Main.cs"
