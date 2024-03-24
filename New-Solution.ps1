@@ -157,7 +157,11 @@ Write-Output "{
 }" | Tee-Object -FilePath "$PSScriptRoot\$ProjectName\plugin.json"
 
 # Generate build script
-Write-Output "`$ErrorActionPreference = `"Stop`"
+Write-Output "Param(
+  [switch]`$Docker = $False
+)
+
+`$ErrorActionPreference = `"Stop`"
 
 `$Version = (Get-Content -Raw -Path `"`$PSScriptRoot\$ProjectName\plugin.json`" | ConvertFrom-Json).Version
 
@@ -165,8 +169,11 @@ if (Test-Path -Path `"`$PSScriptRoot\$ProjectName\bin`") {
   Remove-Item -Path `"`$PSScriptRoot\$ProjectName\bin\*`" -Recurse
 }
 
-dotnet build `$PSScriptRoot\$ProjectName.sln -c Release /p:Platform=`"Any CPU`"
-# docker run -v `"`${PSScriptRoot}:/app`" -w /app mcr.microsoft.com/dotnet/sdk:8.0 dotnet build ILS.sln -c Release /p:Platform=`"Any CPU`"
+if (`$Docker) {
+  docker run -v `"`${PSScriptRoot}:/app`" -w /app mcr.microsoft.com/dotnet/sdk:8.0 dotnet build ILS.sln -c Release /p:Platform=`"Any CPU`"
+} else {
+  dotnet build `$PSScriptRoot\$ProjectName.sln -c Release /p:Platform=`"Any CPU`"
+}
 
 Remove-Item -Path `"`$PSScriptRoot\$ProjectName\bin\*`" -Recurse -Include *.xml, *.pdb, PowerToys.*, Wox.*
 Rename-Item -Path `"`$PSScriptRoot\$ProjectName\bin\Release`" -NewName `"$ProjectName`"
