@@ -176,7 +176,7 @@ else {
   dotnet build `$PSScriptRoot\$ProjectName.sln -c Release /p:Platform=`"Any CPU`"
 }
 
-Remove-Item -Path `"`$PSScriptRoot\$ProjectName\bin\*`" -Recurse -Include *.xml, *.pdb, PowerToys.*, Wox.*
+Remove-Item -Path `"`$PSScriptRoot\$ProjectName\bin\*`" -Recurse -Include *.xml, *.pdb, PowerToys.*, Wox.* -ErrorAction SilentlyContinue
 Rename-Item -Path `"`$PSScriptRoot\$ProjectName\bin\Release`" -NewName `"$ProjectName`"
 
 if (Test-Path -Path `$PSScriptRoot\$ProjectName-`$Version.zip) {
