@@ -170,8 +170,9 @@ if (Test-Path -Path `"`$PSScriptRoot\$ProjectName\bin`") {
 }
 
 if (`$Docker) {
-  docker run -v `"`${PSScriptRoot}:/app`" -w /app mcr.microsoft.com/dotnet/sdk:8.0 dotnet build ILS.sln -c Release /p:Platform=`"Any CPU`"
-} else {
+  docker run -v `"`${PSScriptRoot}:/app`" -w /app mcr.microsoft.com/dotnet/sdk:8.0 dotnet build $ProjectName.sln -c Release /p:Platform=`"Any CPU`"
+}
+else {
   dotnet build `$PSScriptRoot\$ProjectName.sln -c Release /p:Platform=`"Any CPU`"
 }
 
