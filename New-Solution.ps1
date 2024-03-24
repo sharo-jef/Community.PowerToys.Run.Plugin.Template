@@ -158,7 +158,7 @@ Write-Output "{
 
 # Generate build script
 Write-Output "Param(
-  [switch]`$Docker = $False
+  [switch]`$Docker = `$False
 )
 
 `$ErrorActionPreference = `"Stop`"
